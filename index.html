@@ -1,127 +1,235 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sound Buttons</title>
-    <style>
-        #initialPlayer {
-            opacity: 0.000001;
-            /* Barely visible */
-            cursor: pointer;
-        }
-
-        #boxAround {
-            border: 1px solid black;
-        }
-
-        .hiddenBox {
-            border: none;
-        }
-
-        .button-container {
-            position: relative;
-            width: 100px;
-            /* Adjust according to your image dimensions */
-            height: 100px;
-            /* Adjust according to your image dimensions */
-            cursor: pointer;
-        }
-
-        .button-container img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .button-pressed {
-            display: none;
-        }
-        .button-row{
-            display: flex;
-            flex-flow: row wrap;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎂 ODPOČET DO HELENČINÝCH 25tin 🎂</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; overflow-x: hidden; }
+  body {
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+    background: linear-gradient(135deg, #ff00cc, #333399, #00ffcc, #ffcc00, #ff0066);
+    background-size: 400% 400%;
+    animation: bg 8s ease infinite;
+    color: #fff;
+    text-align: center;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ctext y='30' font-size='30'%3E%F0%9F%8E%89%3C/text%3E%3C/svg%3E") 20 20, auto;
+  }
+  @keyframes bg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  h1 {
+    font-size: clamp(1.8rem, 6vw, 4rem);
+    margin: 10px 0;
+    text-shadow: 4px 4px 0 #000, -2px -2px 0 #ff0;
+    animation: wobble 1.5s ease-in-out infinite;
+  }
+  @keyframes wobble {
+    0%,100% { transform: rotate(-3deg) scale(1); }
+    50% { transform: rotate(3deg) scale(1.05); }
+  }
+  .sub {
+    font-size: clamp(1rem, 3vw, 1.6rem);
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 0 #000;
+  }
+  #countdown {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  .box {
+    background: rgba(0,0,0,0.5);
+    border: 4px dashed #fff;
+    border-radius: 20px;
+    padding: 20px 25px;
+    min-width: 110px;
+    box-shadow: 0 0 20px #ff0;
+    animation: pop 2s ease-in-out infinite;
+  }
+  @keyframes pop {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .num {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    font-weight: bold;
+    text-shadow: 3px 3px 0 #ff00cc;
+  }
+  .label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  #hlaska {
+    font-size: clamp(1.1rem, 4vw, 1.8rem);
+    background: rgba(0,0,0,0.4);
+    padding: 15px 25px;
+    border-radius: 15px;
+    margin: 25px 10px;
+    max-width: 700px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 2px 2px 0 #000;
+    transition: transform 0.15s;
+  }
+  button {
+    font-family: inherit;
+    font-size: 1.3rem;
+    padding: 15px 30px;
+    background: #ffcc00;
+    color: #333399;
+    border: 4px solid #fff;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 6px 0 #b38f00;
+    transition: transform 0.1s;
+    margin: 10px;
+  }
+  button:active { transform: translateY(6px); box-shadow: 0 0 0 #b38f00; }
+  .marquee {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    background: rgba(0,0,0,0.6);
+    padding: 8px 0;
+    font-size: 1.2rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+  .marquee span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scroll 15s linear infinite;
+  }
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+  }
+  .done h1 { animation: rainbow 0.5s linear infinite; }
+  @keyframes rainbow {
+    0% { color: red; } 20% { color: orange; } 40% { color: yellow; }
+    60% { color: lime; } 80% { color: cyan; } 100% { color: magenta; }
+  }
+  .confetti {
+    position: fixed;
+    top: -20px;
+    font-size: 2rem;
+    pointer-events: none;
+    animation: fall linear forwards;
+    z-index: 999;
+  }
+  @keyframes fall {
+    to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+</style>
 </head>
-
 <body>
-    <div id="boxAround">
-        <div id="initialPlayer" onclick="hideInitialPlayer()">
-            <iframe onclick="hideInitialPlayer()" id="player" type="text/html" width="640" height="390"
-                src="https://www.youtube.com/embed/BLANK_VIDEO_ID?enablejsapi=1&version=3&playerapiid=ytplayer"
-                frameborder="0" allowfullscreen></iframe>
-        </div>
-    </div>
-<div class="button-row">
-    <div class="button-container" onmousedown="pressButton(this)" onmouseup="releaseButton(this)"
-        onclick="playSound('9yfgOk-9X6k')" onmouseleave="releaseButton(this)">
-        <img src="unpressed.png" class="button-nonpressed">
-        <img src="pressed.png" class="button-pressed">
-    </div>
-    <div class="button-container" onmousedown="pressButton(this)" onmouseup="releaseButton(this)"
-        onclick="playSound('0iV23FhyJ_A')" onmouseleave="releaseButton(this)">
-        <img src="unpressed.png" class="button-nonpressed">
-        <img src="pressed.png" class="button-pressed">
-    </div>
-    <div class="button-container" onmousedown="pressButton(this)" onmouseup="releaseButton(this)"
-        onclick="playSound('La6yRu5kZBg')" onmouseleave="releaseButton(this)">
-        <img src="unpressed.png" class="button-nonpressed">
-        <img src="pressed.png" class="button-pressed">
-    </div>
-</div>
+  <h1>🎉 ODPOČET DO HELENČINÝCH 25tin 🎉</h1>
+  <div class="sub">23. 7. 2026 · den D · čtvrtstoletí Helenky 👑</div>
 
-    <script>
-        function pressButton(container) {
-            const nonPressed = container.querySelector('.button-nonpressed');
-            const pressed = container.querySelector('.button-pressed');
+  <div id="countdown">
+    <div class="box"><div class="num" id="d">0</div><div class="label">dní</div></div>
+    <div class="box"><div class="num" id="h">0</div><div class="label">hodin</div></div>
+    <div class="box"><div class="num" id="m">0</div><div class="label">minut</div></div>
+    <div class="box"><div class="num" id="s">0</div><div class="label">sekund</div></div>
+  </div>
 
-            nonPressed.style.display = 'none';
-            pressed.style.display = 'block';
-        }
+  <div id="hlaska">Načítám cringe...</div>
 
-        function releaseButton(container) {
-            const nonPressed = container.querySelector('.button-nonpressed');
-            const pressed = container.querySelector('.button-pressed');
+  <button onclick="dalsiHlaska()">🎲 DALŠÍ TRAPNÁ HLÁŠKA</button>
+  <button onclick="confettiBomba()">🎊 KONFETY BOMBA</button>
 
-            setTimeout(() => {
-                nonPressed.style.display = 'block';
-                pressed.style.display = 'none';
-            }, 2000);
-        }
+  <div class="marquee"><span>🎂 HELENKA BUDE MÍT 25!!! 🎂 POLOVINA PADESÁTKY 🎂 KVARTÁL STOLETÍ 🎂 STÁLE MLADÁ 🎂 VŠECHNO NEJLEPŠÍ PŘEDEM 🎂 </span></div>
 
+<script>
+  // cíl: 23.7.2026 00:00 místního času
+  var cil = new Date(2026, 6, 23, 0, 0, 0).getTime();
 
-        var player;
+  function tik() {
+    var ted = Date.now();
+    var rozdil = cil - ted;
 
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-        }
+    if (rozdil <= 0) {
+      document.body.classList.add('done');
+      document.querySelector('h1').textContent = '🥳 VŠECHNO NEJLEPŠÍ HELENKO!!! 🥳';
+      document.getElementById('hlaska').textContent = 'JE TO TADY! 25 LET! ZASLOUŽÍŠ SI DORT VELKÝ JAK TVOJE SRDCE ❤️🎂';
+      ['d','h','m','s'].forEach(function(id){ document.getElementById(id).textContent = 0; });
+      if (!window._oslava) { window._oslava = true; setInterval(confettiBomba, 800); }
+      return;
+    }
 
-        function onPlayerReady(event) {
-            // Do nothing on initial player ready
-        }
+    var den = Math.floor(rozdil / 86400000);
+    var hod = Math.floor(rozdil % 86400000 / 3600000);
+    var min = Math.floor(rozdil % 3600000 / 60000);
+    var sek = Math.floor(rozdil % 60000 / 1000);
 
-        function hideInitialPlayer() {
-            document.getElementById('initialPlayer').style.display = 'none';
-            document.getElementById('boxAround').style.display = 'none';
-            document.getElementById('boxAround').classList.add = 'hiddenBox';
-        }
+    document.getElementById('d').textContent = den;
+    document.getElementById('h').textContent = hod;
+    document.getElementById('m').textContent = min;
+    document.getElementById('s').textContent = sek;
+  }
 
-        function playSound(videoId) {
-            player.loadVideoById(videoId);
-            setTimeout(() => {
-                player.playVideo();
-            }, 100);
-        }
-    </script>
+  var hlasky = [
+    "Za tolik času by ses naučila plést 🧶... ale radši ne.",
+    "25 let = 9131 dní přežití. Legenda. 🏆",
+    "Helenka je jak víno 🍷 — starší = dražší údržba.",
+    "Ještě chvilku a máš nárok na seniorskou slevu (skoro). 👵",
+    "Odpočet běží. Dort se peče. Prosím vydrž. 🎂",
+    "25 svíček = malý požár 🔥 volejte hasiče předem.",
+    "Čtvrtstoletí a pořád nevíš co chceš k obědu. Klasika. 🍕",
+    "Věk je jen číslo. Bohužel to číslo roste. 📈",
+    "Helenko, jsi o rok blíž tomu být teta co pije u stolu. 🥂",
+    "Gratulace: odemkla jsi level 25. Bossové jsou tvrdší. 🎮",
+    "Půl cesty k padesátce! ...to jsme neměli říkat. 😬",
+    "Tolik sekund a ještě jsi neuklidila. Šampión. 🧹",
+    "25 — ideální věk, ještě to jde svést na mládí. 😎",
+    "Načítám tvoje dárky... ERROR 404: dárek nenalezen. 🎁",
+    "Helenka: mode 25 aktivován. Baterie na 3 %. 🔋"
+  ];
 
-    <script src="https://www.youtube.com/iframe_api"></script>
+  function dalsiHlaska() {
+    var el = document.getElementById('hlaska');
+    var nova;
+    do { nova = hlasky[Math.floor(Math.random()*hlasky.length)]; }
+    while (nova === el.textContent && hlasky.length > 1);
+    el.textContent = nova;
+    el.style.transform = 'scale(1.15)';
+    setTimeout(function(){ el.style.transform = 'scale(1)'; }, 150);
+  }
+
+  var emoji = ['🎉','🎂','🥳','🎈','🎊','👑','🍾','❤️','⭐','🍰'];
+  function confettiBomba() {
+    for (var i = 0; i < 40; i++) {
+      var c = document.createElement('div');
+      c.className = 'confetti';
+      c.textContent = emoji[Math.floor(Math.random()*emoji.length)];
+      c.style.left = Math.random()*100 + 'vw';
+      c.style.animationDuration = (Math.random()*2 + 2) + 's';
+      c.style.fontSize = (Math.random()*2 + 1.5) + 'rem';
+      document.body.appendChild(c);
+      setTimeout((function(x){ return function(){ x.remove(); }; })(c), 4000);
+    }
+  }
+
+  setInterval(tik, 1000);
+  tik();
+  dalsiHlaska();
+</script>
 </body>
-
 </html>
