@@ -199,10 +199,49 @@
     50% { transform: translate(8px, -4px); }
     75% { transform: translate(-6px, -6px); }
   }
+  .pozvanka {
+    background: rgba(0,0,0,0.55);
+    border: 5px double #ffcc00;
+    border-radius: 20px;
+    padding: 20px 25px;
+    margin: 20px 10px;
+    max-width: 600px;
+    box-shadow: 0 0 25px #ff00cc;
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  @keyframes glow {
+    from { box-shadow: 0 0 15px #ff00cc; }
+    to { box-shadow: 0 0 35px #00ffcc; }
+  }
+  .pozvanka h2 {
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    text-shadow: 3px 3px 0 #000;
+    margin-bottom: 12px;
+  }
+  .pozvanka .radek {
+    font-size: clamp(1rem, 3.5vw, 1.4rem);
+    margin: 8px 0;
+    text-shadow: 2px 2px 0 #000;
+  }
+  .mapabtn {
+    display: inline-block;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 1.25rem;
+    padding: 14px 28px;
+    background: #00ffcc;
+    color: #333399;
+    border: 4px solid #fff;
+    border-radius: 50px;
+    font-weight: bold;
+    box-shadow: 0 6px 0 #009982;
+    margin-top: 12px;
+  }
+  .mapabtn:active { transform: translateY(6px); box-shadow: 0 0 0 #009982; }
 </style>
 </head>
 <body>
-  <div class="wordart">~*~ WELCOME NA HELENČINU STRÁNKU ~*~</div>
+  <div class="wordart">~*~ WELCOME NA HELENČINU OSLAVU ~*~</div>
   <h1>🎉 ODPOČET DO HELENČINÝCH 25tin 🎉</h1>
   <div class="sub">23. 7. 2026 · den D · čtvrtstoletí Helenky 👑</div>
   <div class="sub blink" style="color:#ff0">🚧 STRÁNKA VE VÝSTAVBĚ OD ROKU 1998 🚧</div>
@@ -212,6 +251,15 @@
     <div class="box"><div class="num" id="h">0</div><div class="label">hodin</div></div>
     <div class="box"><div class="num" id="m">0</div><div class="label">minut</div></div>
     <div class="box"><div class="num" id="s">0</div><div class="label">sekund</div></div>
+  </div>
+
+  <div class="pozvanka">
+    <h2>💌 JSI ZVÁN/A NA MEGA OSLAVU 💌</h2>
+    <div class="radek">📅 <b>Čtvrtek 23. 7. 2026</b></div>
+    <div class="radek">🕕 <b>18:00</b> (přijď včas, dort nečeká)</div>
+    <div class="radek">📍 <b>GrillPoint, Výstaviště</b></div>
+    <div class="radek">🍖 grill · 🍺 pití · 🎂 dort · 🎉 Helenka</div>
+    <a class="mapabtn" href="https://mapy.com/s/pevovurupa" target="_blank" rel="noopener">🗺️ OTEVŘÍT MAPU</a>
   </div>
 
   <div id="hlaska">Načítám cringe...</div>
@@ -234,7 +282,7 @@
     <div class="face">📎</div>
   </div>
 
-  <div class="marquee"><span>🎂 HELENKA BUDE MÍT 25!!! 🎂 POLOVINA PADESÁTKY 🎂 KVARTÁL STOLETÍ 🎂 STÁLE MLADÁ 🎂 VŠECHNO NEJLEPŠÍ PŘEDEM 🎂 </span></div>
+  <div class="marquee"><span>🎂 HELENKA BUDE MÍT 25!!! 🎉 23.7.2026 · 18:00 · GRILLPOINT NA VÝSTAVIŠTI 🍖 PŘIJĎ VŠICHNI 🍺 DORT ZDARMA 🎂 NEZAPOMEŇ SE 📍 </span></div>
 
 <script>
   // cíl: 23.7.2026 00:00 místního času
