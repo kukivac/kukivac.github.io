@@ -137,11 +137,75 @@
   @keyframes fall {
     to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
   }
+  .blink { animation: blink 0.7s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .wordart {
+    font-size: clamp(1.3rem, 5vw, 2.5rem);
+    font-weight: 900;
+    font-style: italic;
+    background: linear-gradient(#fff, #ffcc00, #ff0000, #660000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: 2px #000;
+    color: transparent;
+    letter-spacing: 3px;
+    margin: 10px;
+    transform: perspective(200px) rotateX(20deg);
+  }
+  .counter {
+    font-family: 'Courier New', monospace;
+    background: #000;
+    color: #0f0;
+    border: 3px inset #0f0;
+    padding: 6px 12px;
+    display: inline-block;
+    margin: 10px;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+  }
+  .badges { margin: 15px; font-size: 0.85rem; }
+  .badges span {
+    display: inline-block;
+    background: #000;
+    border: 2px ridge #888;
+    padding: 3px 8px;
+    margin: 3px;
+    font-family: 'Courier New', monospace;
+  }
+  #clippy {
+    position: fixed;
+    right: 15px;
+    bottom: 55px;
+    z-index: 1000;
+    max-width: 220px;
+    cursor: pointer;
+    animation: pop 3s ease-in-out infinite;
+  }
+  #clippy .bubble {
+    background: #ffffcc;
+    color: #000;
+    border: 2px solid #000;
+    border-radius: 12px;
+    padding: 10px;
+    font-size: 0.85rem;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.4);
+    text-align: left;
+  }
+  #clippy .face { font-size: 3rem; text-align: right; }
+  .shake { animation: shake 0.4s; }
+  @keyframes shake {
+    0%,100% { transform: translate(0,0); }
+    25% { transform: translate(-8px, 4px); }
+    50% { transform: translate(8px, -4px); }
+    75% { transform: translate(-6px, -6px); }
+  }
 </style>
 </head>
 <body>
+  <div class="wordart">~*~ WELCOME NA HELENČINU STRÁNKU ~*~</div>
   <h1>🎉 ODPOČET DO HELENČINÝCH 25tin 🎉</h1>
   <div class="sub">23. 7. 2026 · den D · čtvrtstoletí Helenky 👑</div>
+  <div class="sub blink" style="color:#ff0">🚧 STRÁNKA VE VÝSTAVBĚ OD ROKU 1998 🚧</div>
 
   <div id="countdown">
     <div class="box"><div class="num" id="d">0</div><div class="label">dní</div></div>
@@ -154,6 +218,21 @@
 
   <button onclick="dalsiHlaska()">🎲 DALŠÍ TRAPNÁ HLÁŠKA</button>
   <button onclick="confettiBomba()">🎊 KONFETY BOMBA</button>
+  <button onclick="zemetreseni()">💥 ZATŘES STRÁNKOU</button>
+  <button onclick="pisknuti()">🔊 NARÓZENINOVÝ ZVUK</button>
+
+  <div class="counter">👁 NÁVŠTĚVNÍKŮ: <span id="pocitadlo">0000000</span></div>
+  <div class="badges">
+    <span>🏆 Best viewed in Netscape 4.0</span>
+    <span>💾 1024x768</span>
+    <span>⭐ HTML 4.01 CERTIFIED</span>
+    <span>📟 Made with Notepad</span>
+  </div>
+
+  <div id="clippy" onclick="dalsiHlaska()">
+    <div class="bubble" id="clippyText">Ahoj! Vypadá to, že chceš popřát Helence. Chceš s tím pomoct? 📎</div>
+    <div class="face">📎</div>
+  </div>
 
   <div class="marquee"><span>🎂 HELENKA BUDE MÍT 25!!! 🎂 POLOVINA PADESÁTKY 🎂 KVARTÁL STOLETÍ 🎂 STÁLE MLADÁ 🎂 VŠECHNO NEJLEPŠÍ PŘEDEM 🎂 </span></div>
 
@@ -200,7 +279,15 @@
     "Tolik sekund a ještě jsi neuklidila. Šampión. 🧹",
     "25 — ideální věk, ještě to jde svést na mládí. 😎",
     "Načítám tvoje dárky... ERROR 404: dárek nenalezen. 🎁",
-    "Helenka: mode 25 aktivován. Baterie na 3 %. 🔋"
+    "Helenka: mode 25 aktivován. Baterie na 3 %. 🔋",
+    "Tvoje horoskop říká: dnes dostaneš dort. Věda nesouhlasí. 🔮",
+    "25 let a ještě neumíš parkovat. Konzistence! 🚗",
+    "Windows XP by ti popřálo, ale už ho vypnuli. 🖥️",
+    "Blahopřejeme! Vyhrála jsi iPhone*! (*nepravda) 📱",
+    "Helenko, jsi oficiálně starší než YouTube. 😱",
+    "Za 25 let jsi vypila oceán kávy. Legenda přežití. ☕",
+    "Přidej si nás mezi TOP 8 na Spolužácích! 👥",
+    "Tvoje kolena už dělají zvuky. To je feature. 🦵"
   ];
 
   function dalsiHlaska() {
@@ -211,6 +298,42 @@
     el.textContent = nova;
     el.style.transform = 'scale(1.15)';
     setTimeout(function(){ el.style.transform = 'scale(1)'; }, 150);
+    document.getElementById('clippyText').textContent = nova;
+  }
+
+  // fake návštěvní počítadlo — roste jak diváci
+  var pocet = 1337000 + Math.floor(Math.random()*900000);
+  function tikPocitadlo() {
+    pocet += Math.floor(Math.random()*7) + 1;
+    document.getElementById('pocitadlo').textContent =
+      String(pocet).padStart(7, '0');
+  }
+
+  function zemetreseni() {
+    document.body.classList.remove('shake');
+    void document.body.offsetWidth; // restart animace
+    document.body.classList.add('shake');
+    confettiBomba();
+  }
+
+  // birthday zvuk přes Web Audio, žádné soubory
+  function pisknuti() {
+    try {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      var ctx = new AC();
+      var noty = [523, 587, 659, 698, 784]; // C D E F G
+      noty.forEach(function(f, i) {
+        var o = ctx.createOscillator();
+        var g = ctx.createGain();
+        o.type = 'square';
+        o.frequency.value = f;
+        o.connect(g); g.connect(ctx.destination);
+        var t = ctx.currentTime + i * 0.18;
+        g.gain.setValueAtTime(0.15, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 0.17);
+        o.start(t); o.stop(t + 0.18);
+      });
+    } catch (e) { alert('Zvuk se nepovedl, ale představ si "Happy Birthday" 🎵'); }
   }
 
   var emoji = ['🎉','🎂','🥳','🎈','🎊','👑','🍾','❤️','⭐','🍰'];
@@ -228,7 +351,9 @@
   }
 
   setInterval(tik, 1000);
+  setInterval(tikPocitadlo, 400);
   tik();
+  tikPocitadlo();
   dalsiHlaska();
 </script>
 </body>
